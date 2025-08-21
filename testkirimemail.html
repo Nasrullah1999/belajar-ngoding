@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form</title>
+    <style>
+        .form-group { margin-bottom: 1rem; }
+        label { display: block; margin-bottom: 0.5rem; }
+        input, textarea { width: 100%; padding: 0.5rem; }
+    </style>
+</head>
+<body>
+    <form id="contactForm">
+        <div class="form-group">
+            <label for="name">Nama Lengkap:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email Anda:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="message">Pesan:</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+        </div>
+        <button type="button" onclick="sendEmail()">Kirim Email</button>
+    </form>
+
+    <script>
+        function sendEmail() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            if (!name || !email || !message) {
+                alert('Harap isi semua field!');
+                return;
+            }
+
+            const subject = `Pesan dari ${name}`;
+            const body = `Nama: ${name}%0AEmail: ${email}%0A%0APesan:%0A${message.replace(/\n/g, '%0A')}`;
+            
+            // Coba buka email client default
+            const mailtoLink = `mailto:?subject=${encodeURIComponent(subject)}&body=${body}`;
+            
+            // Timeout untuk deteksi jika mailto tidak bekerja
+            let mailtoTimeout = setTimeout(() => {
+                window.location.href = `https://mail.google.com/mail/?view=cm&fs=1&tf=1&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body.replace(/%0A/g, '\n'))}`;
+            }, 500);
+            
+            // Buka mailto
+            window.location.href = mailtoLink;
+            
+            // Jika mailto berhasil, browser akan navigasi dan kita batalkan timeout
+            window.onblur = function() {
+                clearTimeout(mailtoTimeout);
+            }
+        }
+    </script>
+</body>
+</html>

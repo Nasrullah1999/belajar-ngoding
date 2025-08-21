@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Portal</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            padding: 24px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(to right, #8a2be2, #4169e1);
+            border-radius: 50%;
+            margin: 0 auto 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 24px;
+            font-size: 24px;
+        }
+
+        .input-group {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #8a2be2;
+            box-shadow: 0 0 0 2px rgba(138, 43, 226, 0.2);
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(to right, #8a2be2, #4169e1);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 16px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .error-message {
+            background-color: #ffebee;
+            color: #e74c3c;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 16px;
+            display: none;
+        }
+
+        .password-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 16px;
+            display: none;
+        }
+
+        .password-table th,
+        .password-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .password-table th {
+            background-color: #f2f2f2;
+        }
+
+        .success-message {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 16px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="form-container">
+        <div class="logo">
+            <svg width="40px" height="40px" stroke="none" fill="white" viewBox="0 0 48 48" border="none" xmlns="http://www.w3.org/2000/svg">
+                <title>wifi-error</title>
+                <g id="Layer_2" data-name="Layer 2">
+                    <g id="invisible_box" data-name="invisible box">
+                        <rect width="48" height="48" fill="none" />
+                    </g>
+                    <g id="Q3_icons" data-name="Q3 icons">
+                        <g>
+                            <path
+                                d="M19.9,27.3l-.2-1.7a15.6,15.6,0,0,0-7.4,4.9,1.9,1.9,0,0,0-.4,1.2,2,2,0,0,0,.4,1.3,2,2,0,0,0,3.1,0,11.2,11.2,0,0,1,5.3-3.5A3.5,3.5,0,0,1,19.9,27.3Z" />
+                            <path
+                                d="M28.3,25.6l-.2,1.7a3.5,3.5,0,0,1-.8,2.2A11.2,11.2,0,0,1,32.6,33a2,2,0,0,0,3.1,0,2.1,2.1,0,0,0,0-2.5A15.6,15.6,0,0,0,28.3,25.6Z" />
+                            <path
+                                d="M19.1,17.5A23,23,0,0,0,7.5,23.9a2,2,0,0,0-.6,1.4,2.8,2.8,0,0,0,.4,1.2,1.9,1.9,0,0,0,3,.2,18.8,18.8,0,0,1,9.1-5.1Z" />
+                            <path
+                                d="M28.9,17.5l-.3,4.1a18.8,18.8,0,0,1,9.1,5.1,1.9,1.9,0,0,0,3-.2,2,2,0,0,0-.2-2.6A23,23,0,0,0,28.9,17.5Z" />
+                            <path
+                                d="M18.5,9.5A32,32,0,0,0,2.6,17.4a2.1,2.1,0,0,0-.2,2.7h0a2,2,0,0,0,3,.2,27.7,27.7,0,0,1,13.4-6.8Z" />
+                            <path
+                                d="M45.4,17.4A32,32,0,0,0,29.5,9.5l-.3,4a27.7,27.7,0,0,1,13.4,6.8,2,2,0,0,0,3-.2h0A2.1,2.1,0,0,0,45.4,17.4Z" />
+                            <circle cx="24" cy="38" r="5" />
+                            <path
+                                d="M23.9,29h.2a1.9,1.9,0,0,0,2-1.9L27.7,7a3.7,3.7,0,1,0-7.4,0l1.6,20.1A1.9,1.9,0,0,0,23.9,29Z" />
+                        </g>
+                    </g>
+                </g>
+            </svg>
+        </div>
+        <h1>Password Authentication</h1>
+
+        <form id="passwordForm">
+            <div class="input-group">
+                <input type="password" id="password" placeholder="Masukkan kata sandi">
+            </div>
+
+            <button type="submit" id="submitBtn">Masuk</button>
+
+            <div id="errorMessage" class="error-message">
+                Password salah! Silakan coba lagi.
+            </div>
+
+            <div id="successMessage" class="success-message">
+                Password benar! Berikut daftar password yang pernah dicoba:
+            </div>
+
+            <table id="passwordTable" class="password-table">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Password</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="passwordTableBody">
+                    <!-- Data akan diisi oleh JavaScript -->
+                </tbody>
+            </table>
+        </form>
+    </div>
+
+    <script>
+        const form = document.getElementById('passwordForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const errorMessage = document.getElementById('errorMessage');
+        const successMessage = document.getElementById('successMessage');
+        const passwordTable = document.getElementById('passwordTable');
+        const passwordTableBody = document.getElementById('passwordTableBody');
+
+        // Simpan riwayat password yang dicoba
+        const passwordAttempts = [];
+
+        // Password yang benar (bisa diganti sesuai kebutuhan)
+        const correctPassword = "esp32";
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Sembunyikan semua pesan
+            errorMessage.style.display = 'none';
+            successMessage.style.display = 'none';
+            passwordTable.style.display = 'none';
+
+            // Ambil password yang dimasukkan
+            const password = document.getElementById('password').value.trim();
+
+            // Validasi input tidak kosong
+            if (!password) {
+                errorMessage.textContent = "Password tidak boleh kosong!";
+                errorMessage.style.display = 'block';
+                return;
+            }
+
+            // Simpan riwayat percobaan
+            passwordAttempts.push({
+                password: password,
+                correct: password === correctPassword,
+                timestamp: new Date().toLocaleTimeString()
+            });
+
+            // Tampilkan loading
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Checking...';
+
+            // Simulasi proses pengecekan
+            setTimeout(() => {
+                if (password === correctPassword) {
+                    // Jika password benar
+                    successMessage.style.display = 'block';
+                    passwordTable.style.display = 'table';
+
+                    // Isi tabel dengan riwayat password
+                    passwordTableBody.innerHTML = '';
+                    passwordAttempts.forEach((attempt, index) => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${index + 1}</td>
+                            <td>${attempt.password}</td>
+                            <td style="color: ${attempt.correct ? 'green' : 'red'}">
+                                ${attempt.correct ? 'Benar' : 'Salah'}
+                            </td>
+                        `;
+                        passwordTableBody.appendChild(row);
+                    });
+                } else {
+                    // Jika password salah
+                    errorMessage.style.display = 'block';
+                }
+
+                // Reset tombol
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit';
+
+                // Kosongkan input
+                document.getElementById('password').value = '';
+                document.getElementById('password').focus();
+            }, 800);
+        });
+    </script>
+</body>
+
+</html>
